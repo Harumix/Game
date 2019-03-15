@@ -31,7 +31,7 @@ int main()
 		return EXIT_FAILURE;
 	}
 	sf::Sprite lionSprite(lionTexture);
-	lionSprite.setPosition(500, 500);
+	lionSprite.setPosition(500, 0);
 
 	// Create a graphical text to display
 	sf::Font Odelette;
@@ -40,7 +40,7 @@ int main()
 	}
 	sf::Text text("Hello World", Odelette, 50);
 	text.setFillColor(sf::Color::Red);
-	text.setPosition(500, 500);
+	text.setPosition(0,0);
 
 	// Load a music to play
 	sf::Music music;
@@ -71,10 +71,28 @@ int main()
 		// Clear screen
 		window.clear();
 
-		
-	
 		// Draw the sprite
 		window.draw(lionSprite);
+
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
+		{
+			lionSprite.move(-0.1, 0);
+		}
+
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
+		{
+			lionSprite.move(0.1, 0);
+		}
+
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
+		{
+			lionSprite.move(0, -0.1);
+		}
+
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
+		{
+			lionSprite.move(0, 0.1);
+		}
 
 		// Draw the string
 		window.draw(text);

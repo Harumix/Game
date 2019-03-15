@@ -1,3 +1,7 @@
 ﻿  main.cpp
 c:\users\r2r2\desktop\game\game\game\main.cpp(4): warning C4067: nieoczekiwane tokeny występujące po dyrektywie preprocesora - oczekiwano nowego wiersza
+c:\users\r2r2\desktop\game\game\game\main.cpp(79): warning C4305: "argument": obcięcie z "double" do "float"
+c:\users\r2r2\desktop\game\game\game\main.cpp(84): warning C4305: "argument": obcięcie z "double" do "float"
+c:\users\r2r2\desktop\game\game\game\main.cpp(89): warning C4305: "argument": obcięcie z "double" do "float"
+c:\users\r2r2\desktop\game\game\game\main.cpp(94): warning C4305: "argument": obcięcie z "double" do "float"
   Game.vcxproj -> C:\Users\R2R2\Desktop\Game\Game\x64\Debug\Game.exe
