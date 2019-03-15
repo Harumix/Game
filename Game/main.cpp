@@ -2,16 +2,20 @@
 #include <SFML/Audio.hpp>
 #include <iostream>
 #include "ResourcePath.hpp""
+#include "player.h"
+#include "projectile.h"
+#include "enemy.h"
+#include "random.h"
 
 using std::cout;
 using std::cin;
+using std::vector;
 using std::endl;
 
 int main()
 {
-	//Zmienne
-	float movementSpeed = 0.025;
-	int counterWalking = 0;
+	int counter = 0;
+	int counter2 = 0;
 
 	// Tworzenie okna 
 	sf::RenderWindow window(sf::VideoMode(800, 600), "Game");
@@ -25,20 +29,18 @@ int main()
 	// Ikona okna
 	sf::Image icon;
 	if (!icon.loadFromFile("../External/Graphics/Lion.jpg")) {
-		//return EXIT_FAILURE;
+		return EXIT_FAILURE;
 	}
 	window.setIcon(icon.getSize().x, icon.getSize().y, icon.getPixelsPtr());
 
-	// Tworzenie Sprite
+	// Sprite Postaci
 	sf::Texture characterTexture;
 	if (!characterTexture.loadFromFile("../External/Graphics/character.png")) {
 		return EXIT_FAILURE;
 	}
 	sf::Sprite characterSprite(characterTexture);
-	characterSprite.setPosition(150, 150);
-	characterSprite.setTextureRect(sf::IntRect(128, 128, 64, 64));
 
-	// Tworzenie tekstu
+	// Tekst Naglowkowy
 	sf::Font Odelette;
 	if (!Odelette.loadFromFile("../External/Fonts/Odelette.ttf")) {
 		return EXIT_FAILURE;
@@ -54,6 +56,30 @@ int main()
 	music.setVolume(1);
 	music.play();
 
+	// Klasa postaci
+	class player Player1;
+	Player1.sprite.setTexture(characterTexture);
+
+	// Wektor pociskow
+	vector<projectile>::const_iterator iter;
+	vector<projectile> projectileArray;
+
+	// Klasa pocisku
+	class projectile projectile1;
+
+	// Wektor przeciwnikow
+	vector<enemy>::const_iterator iter2;
+	vector<enemy> enemyArray;
+
+	// Klasa przeciwinka
+	class enemy enemy1;
+	enemy1.sprite.setTexture(characterTexture);
+	enemy1.rect.setPosition(200, 200);
+	enemyArray.push_back(enemy1);
+	enemyArray.push_back(enemy1);
+	enemyArray.push_back(enemy1);
+	enemyArray.push_back(enemy1);
+	enemyArray.push_back(enemy1);
 
 	// Petla gry
 	while (window.isOpen())
@@ -76,38 +102,40 @@ int main()
 		// Clear screen
 		window.clear();
 
-		// Draw the sprite
-		window.draw(characterSprite);
-
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
+		// Create projectiles
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
 		{
-			characterSprite.move(-movementSpeed, 0);
-			characterSprite.setTextureRect(sf::IntRect(0+(64*counterWalking),64, 64, 64));
+			projectile1.rect.setPosition(Player1.rect.getPosition().x + Player1.rect.getSize().x/2, Player1.rect.getPosition().y + Player1.rect.getSize().y/2);
+			projectile1.direction = Player1.direction;
+			projectileArray.push_back(projectile1);
 		}
 
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
+		// Draw projectiles
+		counter = 0;
+		for (iter = projectileArray.begin(); iter != projectileArray.end(); iter++)
 		{
-			characterSprite.move(movementSpeed, 0);
-			characterSprite.setTextureRect(sf::IntRect(0 + (64 * counterWalking),192, 64, 64));
+			projectileArray[counter].update();
+			window.draw(projectileArray[counter].rect);
+			counter++;
 		}
 
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
+		// Draw Enemies
+		counter2 = 0;
+		for (iter2 = enemyArray.begin(); iter2 != enemyArray.end(); iter2++)
 		{
-			characterSprite.move(0, -movementSpeed);
-			characterSprite.setTextureRect(sf::IntRect(0 + (64 * counterWalking),0, 64, 64));
+			//window.draw(enemyArray[counter2].rect);
+			enemyArray[counter2].update();
+			enemyArray[counter2].updateMovement();
+			window.draw(enemyArray[counter2].sprite);
+			counter2++;
 		}
 
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
-		{
-			characterSprite.move(0, movementSpeed);
-			characterSprite.setTextureRect(sf::IntRect(0 + (64 * counterWalking),128, 64, 64));
-		}
+		// Draw Player
+		window.draw(Player1.sprite);
 
-		counterWalking++;
-
-		if (counterWalking == 9) {
-			counterWalking = 0;
-		}
+		// Update Player
+		Player1.update();
+		Player1.updateMovement();
 
 		// Draw the string
 		window.draw(text);

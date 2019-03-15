@@ -133,9 +133,19 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="enemy.cpp" />
+    <ClCompile Include="entity.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="player.cpp" />
+    <ClCompile Include="projectile.cpp" />
+    <ClCompile Include="random.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="enemy.h" />
+    <ClInclude Include="entity.h" />
+    <ClInclude Include="player.h" />
+    <ClInclude Include="projectile.h" />
+    <ClInclude Include="random.h" />
     <ClInclude Include="ResourcePath.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
