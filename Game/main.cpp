@@ -51,7 +51,7 @@ int main()
 	sf::Music music;
 	if (!music.openFromFile("../External/Music/PumpedUpKicks.ogg"))
 		return -1;
-	music.setVolume(10);
+	music.setVolume(1);
 	music.play();
 
 
