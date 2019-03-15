@@ -18,31 +18,32 @@ int main()
 	// Nazwa okna
 	window.setTitle("Game");
 
-	// Set the Icon
+	// Ikona okna
 	sf::Image icon;
 	if (!icon.loadFromFile("../External/Graphics/Lion.jpg")) {
 		return EXIT_FAILURE;
 	}
 	window.setIcon(icon.getSize().x, icon.getSize().y, icon.getPixelsPtr());
 
-	// Load a sprite to display
-	sf::Texture lionTexture;
-	if (!lionTexture.loadFromFile("../External/Graphics/Lion.jpg")) {
+	// Tworzenie Sprite
+	sf::Texture characterTexture;
+	if (!characterTexture.loadFromFile("../External/Graphics/character.png")) {
 		return EXIT_FAILURE;
 	}
-	sf::Sprite lionSprite(lionTexture);
-	lionSprite.setPosition(500, 0);
+	sf::Sprite characterSprite(characterTexture);
+	characterSprite.setPosition(150, 150);
+	characterSprite.setTextureRect(sf::IntRect(128, 128, 64, 64));
 
-	// Create a graphical text to display
+	// Tworzenie tekstu
 	sf::Font Odelette;
 	if (!Odelette.loadFromFile("../External/Fonts/Odelette.ttf")) {
-		//return EXIT_FAILURE;
+		return EXIT_FAILURE;
 	}
-	sf::Text text("Hello World", Odelette, 50);
+	sf::Text text("Game", Odelette, 50);
 	text.setFillColor(sf::Color::Red);
-	text.setPosition(0,0);
+	text.setPosition(400,0);
 
-	// Load a music to play
+	// Tworzenie muzyki
 	sf::Music music;
 	if (!music.openFromFile("../External/Music/PumpedUpKicks.ogg"))
 		return -1;
@@ -50,7 +51,7 @@ int main()
 	music.play();
 
 
-	// Start the game loop
+	// Petla gry
 	while (window.isOpen())
 	{
 		//Process events
@@ -72,26 +73,31 @@ int main()
 		window.clear();
 
 		// Draw the sprite
-		window.draw(lionSprite);
+		window.draw(characterSprite);
+		
 
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
 		{
-			lionSprite.move(-0.1, 0);
+			characterSprite.move(-0.1, 0);
+			characterSprite.setTextureRect(sf::IntRect(64, 64, 64, 64));
 		}
 
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
 		{
-			lionSprite.move(0.1, 0);
+			characterSprite.move(0.1, 0);
+			characterSprite.setTextureRect(sf::IntRect(192, 192, 64, 64));
 		}
 
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
 		{
-			lionSprite.move(0, -0.1);
+			characterSprite.move(0, -0.1);
+			characterSprite.setTextureRect(sf::IntRect(0, 0, 64, 64));
 		}
 
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
 		{
-			lionSprite.move(0, 0.1);
+			characterSprite.move(0, 0.1);
+			characterSprite.setTextureRect(sf::IntRect(128, 128, 64, 64));
 		}
 
 		// Draw the string
