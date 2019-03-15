@@ -31,26 +31,24 @@ int main()
 		return EXIT_FAILURE;
 	}
 	sf::Sprite lionSprite(lionTexture);
-
-	/*
+	lionSprite.setPosition(500, 500);
 
 	// Create a graphical text to display
-	sf::Font font;
-	if (!font.loadFromFile("font.ttf")) {
+	sf::Font Odelette;
+	if (!Odelette.loadFromFile("../External/Fonts/Odelette.ttf")) {
 		//return EXIT_FAILURE;
 	}
-	sf::Text text("Hello World", font, 50);
+	sf::Text text("Hello World", Odelette, 50);
+	text.setFillColor(sf::Color::Red);
+	text.setPosition(500, 500);
 
 	// Load a music to play
 	sf::Music music;
-	if (!music.openFromFile("music.mp3")) {
-		//return EXIT_FAILURE;
-	}
-
-	// Play music
+	if (!music.openFromFile("../External/Music/PumpedUpKicks.ogg"))
+		return -1;
+	music.setVolume(10);
 	music.play();
 
-	*/
 
 	// Start the game loop
 	while (window.isOpen())
@@ -79,7 +77,7 @@ int main()
 		window.draw(lionSprite);
 
 		// Draw the string
-		//window.draw(text);
+		window.draw(text);
 
 		// Update the window
 		window.display();
