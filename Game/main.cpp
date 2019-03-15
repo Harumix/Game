@@ -9,6 +9,10 @@ using std::endl;
 
 int main()
 {
+	//Zmienne
+	float movementSpeed = 0.025;
+	int counterWalking = 0;
+
 	// Tworzenie okna 
 	sf::RenderWindow window(sf::VideoMode(800, 600), "Game");
 	// Pozycja startowa okna
@@ -21,7 +25,7 @@ int main()
 	// Ikona okna
 	sf::Image icon;
 	if (!icon.loadFromFile("../External/Graphics/Lion.jpg")) {
-		return EXIT_FAILURE;
+		//return EXIT_FAILURE;
 	}
 	window.setIcon(icon.getSize().x, icon.getSize().y, icon.getPixelsPtr());
 
@@ -74,30 +78,35 @@ int main()
 
 		// Draw the sprite
 		window.draw(characterSprite);
-		
 
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
 		{
-			characterSprite.move(-0.1, 0);
-			characterSprite.setTextureRect(sf::IntRect(64, 64, 64, 64));
+			characterSprite.move(-movementSpeed, 0);
+			characterSprite.setTextureRect(sf::IntRect(0+(64*counterWalking),64, 64, 64));
 		}
 
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
 		{
-			characterSprite.move(0.1, 0);
-			characterSprite.setTextureRect(sf::IntRect(192, 192, 64, 64));
+			characterSprite.move(movementSpeed, 0);
+			characterSprite.setTextureRect(sf::IntRect(0 + (64 * counterWalking),192, 64, 64));
 		}
 
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
 		{
-			characterSprite.move(0, -0.1);
-			characterSprite.setTextureRect(sf::IntRect(0, 0, 64, 64));
+			characterSprite.move(0, -movementSpeed);
+			characterSprite.setTextureRect(sf::IntRect(0 + (64 * counterWalking),0, 64, 64));
 		}
 
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
 		{
-			characterSprite.move(0, 0.1);
-			characterSprite.setTextureRect(sf::IntRect(128, 128, 64, 64));
+			characterSprite.move(0, movementSpeed);
+			characterSprite.setTextureRect(sf::IntRect(0 + (64 * counterWalking),128, 64, 64));
+		}
+
+		counterWalking++;
+
+		if (counterWalking == 9) {
+			counterWalking = 0;
 		}
 
 		// Draw the string
