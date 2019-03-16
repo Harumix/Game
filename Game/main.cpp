@@ -39,6 +39,7 @@ int main()
 		return EXIT_FAILURE;
 	}
 	sf::Sprite characterSprite(characterTexture);
+	characterTexture.setSmooth(true);
 
 	// Tekst Naglowkowy
 	sf::Font Odelette;

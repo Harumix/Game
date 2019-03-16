@@ -2,10 +2,11 @@
 
 player::player()
 {
-	rect.setSize(sf::Vector2f(50, 50));
+	rect.setSize(sf::Vector2f(250, 250));
 	rect.setPosition(0, 0);
 	rect.setFillColor(sf::Color::Cyan);
 	sprite.setTextureRect(sf::IntRect(128, 128, 64, 64));
+	sprite.setScale(sf::Vector2f(4, 8));
 }
 
 void player::update()
