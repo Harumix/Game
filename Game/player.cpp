@@ -2,7 +2,7 @@
 
 player::player()
 {
-	rect.setSize(sf::Vector2f(250, 250));
+	rect.setSize(sf::Vector2f(100, 250));
 	rect.setPosition(0, 0);
 	rect.setFillColor(sf::Color::Cyan);
 	sprite.setTextureRect(sf::IntRect(128, 128, 64, 64));

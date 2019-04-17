@@ -14,8 +14,12 @@ using std::endl;
 
 int main()
 {
+	sf::Clock clock1;
+	sf::Clock clock2;
+	sf::Clock clock3;
 	int counter = 0;
 	int counter2 = 0;
+	int counter3 = 0;
 
 	// Tworzenie okna 
 	sf::RenderWindow window(sf::VideoMode(800, 600), "Game");
@@ -25,7 +29,7 @@ int main()
 	window.setSize(sf::Vector2u(800, 600));
 	// Nazwa okna
 	window.setTitle("Game");
-
+	window.setFramerateLimit(60);
 	// Ikona okna
 	sf::Image icon;
 	if (!icon.loadFromFile("../External/Graphics/Lion.jpg")) {
@@ -35,13 +39,13 @@ int main()
 
 	// Sprite Postaci
 	sf::Texture characterTexture;
-	if (!characterTexture.loadFromFile("../External/Graphics/character.png")) {
+	if (!characterTexture.loadFromFile("../External/Graphics/Character.png")) {
 		return EXIT_FAILURE;
 	}
 	sf::Sprite characterSprite(characterTexture);
 	characterTexture.setSmooth(true);
 
-	// Tekst Naglowkowy
+		// Tekst Naglowkowy
 	sf::Font Odelette;
 	if (!Odelette.loadFromFile("../External/Fonts/Odelette.ttf")) {
 		return EXIT_FAILURE;
@@ -61,6 +65,7 @@ int main()
 	class player Player1;
 	Player1.sprite.setTexture(characterTexture);
 
+
 	// Wektor pociskow
 	vector<projectile>::const_iterator iter;
 	vector<projectile> projectileArray;
@@ -77,10 +82,7 @@ int main()
 	enemy1.sprite.setTexture(characterTexture);
 	enemy1.rect.setPosition(200, 200);
 	enemyArray.push_back(enemy1);
-	enemyArray.push_back(enemy1);
-	enemyArray.push_back(enemy1);
-	enemyArray.push_back(enemy1);
-	enemyArray.push_back(enemy1);
+	
 
 	// Petla gry
 	while (window.isOpen())
@@ -103,12 +105,59 @@ int main()
 		// Clear screen
 		window.clear();
 
-		// Create projectiles
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
+		sf::Time elapsed1 = clock1.getElapsedTime();
+		sf::Time elapsed2 = clock2.getElapsedTime();
+		sf::Time elapsed3 = clock3.getElapsedTime();
+
+		//Colission
+		counter = 0;
+		for (iter = projectileArray.begin(); iter != projectileArray.end(); iter++)
 		{
-			projectile1.rect.setPosition(Player1.rect.getPosition().x + Player1.rect.getSize().x/2, Player1.rect.getPosition().y + Player1.rect.getSize().y/2);
-			projectile1.direction = Player1.direction;
-			projectileArray.push_back(projectile1);
+			counter2 = 0;
+			for (iter2 = enemyArray.begin(); iter2 != enemyArray.end(); iter2++)
+			{
+				if (projectileArray[counter].rect.getGlobalBounds().intersects(enemyArray[counter2].rect.getGlobalBounds())) {
+					projectileArray[counter].destroy = true;
+					enemyArray[counter2].hp-=projectile1.attackDamage;
+					if (enemyArray[counter2].hp <= 0) enemyArray[counter2].alive = false;
+				}
+				counter2++;
+			}
+			counter++;
+		}
+
+		//Delete Projectile
+		counter = 0;
+		for (iter = projectileArray.begin(); iter != projectileArray.end(); iter++)
+		{
+			if (projectileArray[counter].destroy == true) {
+				projectileArray.erase(iter);
+				break;
+			}
+
+			counter++;
+		}
+
+		//Dead
+		counter = 0;
+		for (iter2 = enemyArray.begin(); iter2 != enemyArray.end(); iter2++)
+		{
+			if (enemyArray[counter].alive == false) {
+				enemyArray.erase(iter2);
+				break;
+			}
+			counter++;
+		}
+		// Create projectiles
+		if (elapsed1.asSeconds() >= 0.1) {
+
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
+			{
+				projectile1.rect.setPosition(Player1.rect.getPosition().x + Player1.rect.getSize().x / 2, Player1.rect.getPosition().y + Player1.rect.getSize().y / 2);
+				projectile1.direction = Player1.direction;
+				projectileArray.push_back(projectile1);
+				clock1.restart();
+			}	
 		}
 
 		// Draw projectiles
@@ -121,6 +170,14 @@ int main()
 		}
 
 		// Draw Enemies
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Numpad7)) {
+			enemyArray.push_back(enemy1);
+			enemyArray.push_back(enemy1);
+			enemyArray.push_back(enemy1);
+			enemyArray.push_back(enemy1);
+			enemyArray.push_back(enemy1);
+		}
+
 		counter2 = 0;
 		for (iter2 = enemyArray.begin(); iter2 != enemyArray.end(); iter2++)
 		{
