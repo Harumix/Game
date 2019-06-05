@@ -6,13 +6,13 @@
 class enemy : public entity
 {
 public:
-	float movementSpeed = 2.0;
+	float movementSpeed = 5.0;
 	float movementLenght = 20;
 	int attackDamage = 5;
 	int counterWalking = 0;
 	int direction = 0; // 1 - down, 2 - up, 3 - left, 4 - right
 	int counterRoad;
-	int hp = 5;
+	int hp = 100;
 	bool alive = true;
 
 	enemy();

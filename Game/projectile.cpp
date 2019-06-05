@@ -3,7 +3,6 @@
 projectile::projectile() 
 {
 	rect.setSize(sf::Vector2f(25, 25));
-	rect.setPosition(0, 0);
 	rect.setFillColor(sf::Color::Green);
 	//sprite.setTextureRect(sf::IntRect(128, 128, 64, 64));
 }

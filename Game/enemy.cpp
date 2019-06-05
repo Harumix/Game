@@ -2,15 +2,16 @@
 
 enemy::enemy()
 {
-	rect.setSize(sf::Vector2f(50, 50));
-	rect.setPosition(250, 250);
+	rect.setSize(sf::Vector2f(50, 128));
+	rect.setPosition(500, 158);
 	rect.setFillColor(sf::Color::Cyan);
 	sprite.setTextureRect(sf::IntRect(128, 128, 64, 64));
+	sprite.setScale(sf::Vector2f(2, 1));
 }
 
 void enemy::update()
 {
-	sprite.setPosition(rect.getPosition());
+	sprite.setPosition(rect.getPosition().x-40,rect.getPosition().y);
 }
 
 void enemy::updateMovement()
@@ -27,6 +28,7 @@ void enemy::updateMovement()
 		sprite.setTextureRect(sf::IntRect(0 + (64 * counterWalking), 192, 64, 64));
 	}
 
+	/*
 	else if (direction == 2)
 	{
 		rect.move(0, -movementSpeed);
@@ -37,7 +39,7 @@ void enemy::updateMovement()
 	{
 		rect.move(0, movementSpeed);
 		sprite.setTextureRect(sf::IntRect(0 + (64 * counterWalking), 128, 64, 64));
-	}
+	}*/
 	else 
 	{
 		// MAGIA NIC TU NIE

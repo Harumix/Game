@@ -22,11 +22,11 @@ int main()
 	int counter3 = 0;
 
 	// Tworzenie okna 
-	sf::RenderWindow window(sf::VideoMode(800, 600), "Game");
+	sf::RenderWindow window(sf::VideoMode(660, 222), "Game");
 	// Pozycja startowa okna
-	window.setPosition(sf::Vector2i(100, 50));
+	window.setPosition(sf::Vector2i(20, sf::VideoMode::getDesktopMode().height/5));
 	// Rozmiar okna
-	window.setSize(sf::Vector2u(800, 600));
+	window.setSize(sf::Vector2u(1320, 440));
 	// Nazwa okna
 	window.setTitle("Game");
 	window.setFramerateLimit(60);
@@ -37,6 +37,15 @@ int main()
 	}
 	window.setIcon(icon.getSize().x, icon.getSize().y, icon.getPixelsPtr());
 
+	//Tlo gry
+	sf::Texture tbackground;
+	tbackground.loadFromFile("../External/Graphics/street.png");
+	sf::Sprite sbackground;
+	sf::Vector2u size = tbackground.getSize();
+	sbackground.setTexture(tbackground);
+	//sbackground.setScale(sf::Vector2f(2,2));
+	//sbackground.setOrigin(size.x/4, size.y/4);
+
 	// Sprite Postaci
 	sf::Texture characterTexture;
 	if (!characterTexture.loadFromFile("../External/Graphics/Character.png")) {
@@ -46,13 +55,13 @@ int main()
 	characterTexture.setSmooth(true);
 
 		// Tekst Naglowkowy
-	sf::Font Odelette;
-	if (!Odelette.loadFromFile("../External/Fonts/Odelette.ttf")) {
-		return EXIT_FAILURE;
-	}
-	sf::Text text("Game", Odelette, 50);
-	text.setFillColor(sf::Color::Red);
-	text.setPosition(400,0);
+	//sf::Font Odelette;
+	//if (!Odelette.loadFromFile("../External/Fonts/Odelette.ttf")) {
+	//	return EXIT_FAILURE;
+	//}
+	//sf::Text text("Game", Odelette, 50);
+	//text.setFillColor(sf::Color::Red);
+	//text.setPosition(400,0);
 
 	// Tworzenie muzyki
 	sf::Music music;
@@ -80,7 +89,7 @@ int main()
 	// Klasa przeciwinka
 	class enemy enemy1;
 	enemy1.sprite.setTexture(characterTexture);
-	enemy1.rect.setPosition(200, 200);
+	//enemy1.rect.setPosition(200, 200);
 	enemyArray.push_back(enemy1);
 	
 
@@ -104,6 +113,8 @@ int main()
 		
 		// Clear screen
 		window.clear();
+
+		window.draw(sbackground);
 
 		sf::Time elapsed1 = clock1.getElapsedTime();
 		sf::Time elapsed2 = clock2.getElapsedTime();
@@ -148,12 +159,12 @@ int main()
 			}
 			counter++;
 		}
-		// Create projectiles
-		if (elapsed1.asSeconds() >= 0.1) {
+		// Create projectiles 
+		if (elapsed1.asSeconds() >= 1) {
 
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
 			{
-				projectile1.rect.setPosition(Player1.rect.getPosition().x + Player1.rect.getSize().x / 2, Player1.rect.getPosition().y + Player1.rect.getSize().y / 2);
+				projectile1.rect.setPosition(Player1.rect.getPosition().x + Player1.rect.getSize().x / 2, Player1.rect.getPosition().y);
 				projectile1.direction = Player1.direction;
 				projectileArray.push_back(projectile1);
 				clock1.restart();
@@ -172,16 +183,12 @@ int main()
 		// Draw Enemies
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Numpad7)) {
 			enemyArray.push_back(enemy1);
-			enemyArray.push_back(enemy1);
-			enemyArray.push_back(enemy1);
-			enemyArray.push_back(enemy1);
-			enemyArray.push_back(enemy1);
 		}
 
 		counter2 = 0;
 		for (iter2 = enemyArray.begin(); iter2 != enemyArray.end(); iter2++)
 		{
-			//window.draw(enemyArray[counter2].rect);
+			window.draw(enemyArray[counter2].rect);
 			enemyArray[counter2].update();
 			enemyArray[counter2].updateMovement();
 			window.draw(enemyArray[counter2].sprite);
@@ -196,7 +203,7 @@ int main()
 		Player1.updateMovement();
 
 		// Draw the string
-		window.draw(text);
+		//window.draw(text);
 
 		// Update the window
 		window.display();

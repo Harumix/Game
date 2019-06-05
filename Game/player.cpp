@@ -3,15 +3,19 @@
 player::player()
 {
 	rect.setSize(sf::Vector2f(100, 250));
-	rect.setPosition(0, 0);
+	rect.setPosition(0, 158);
 	rect.setFillColor(sf::Color::Cyan);
 	sprite.setTextureRect(sf::IntRect(128, 128, 64, 64));
-	sprite.setScale(sf::Vector2f(4, 8));
+	sprite.setScale(sf::Vector2f(2, 1));
 }
 
 void player::update()
 {
 	sprite.setPosition(rect.getPosition());
+}
+
+void player::displayHP() {
+
 }
 
 void player::updateMovement()
@@ -30,7 +34,7 @@ void player::updateMovement()
 		direction = 4;
 	}
 
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
+/*	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
 	{
 		rect.move(0, -movementSpeed);
 		sprite.setTextureRect(sf::IntRect(0 + (64 * counterWalking), 0, 64, 64));
@@ -42,7 +46,7 @@ void player::updateMovement()
 		rect.move(0, movementSpeed);
 		sprite.setTextureRect(sf::IntRect(0 + (64 * counterWalking), 128, 64, 64));
 		direction = 1;
-	}
+	}*/
 
 	counterWalking++;
 
