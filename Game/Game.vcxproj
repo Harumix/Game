@@ -133,20 +133,39 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="ChoiceScreen.cpp" />
     <ClCompile Include="enemy.cpp" />
     <ClCompile Include="entity.cpp" />
+    <ClCompile Include="Game.cpp" />
+    <ClCompile Include="GameScreenVsE.cpp" />
+    <ClCompile Include="GameScreenVsP.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="MouseManager.cpp" />
     <ClCompile Include="player.cpp" />
     <ClCompile Include="projectile.cpp" />
+    <ClCompile Include="PvEScreen.cpp" />
+    <ClCompile Include="PvPScreen.cpp" />
     <ClCompile Include="random.cpp" />
+    <ClCompile Include="StartScreen.cpp" />
+    <ClCompile Include="StateMaschine.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ChoiceScreen.h" />
     <ClInclude Include="enemy.h" />
     <ClInclude Include="entity.h" />
+    <ClInclude Include="Game.hpp" />
+    <ClInclude Include="GameScreenVsE.h" />
+    <ClInclude Include="GameScreenVsP.h" />
+    <ClInclude Include="MouseManager.h" />
     <ClInclude Include="player.h" />
     <ClInclude Include="projectile.h" />
+    <ClInclude Include="PvEScreen.h" />
+    <ClInclude Include="PvPScreen.h" />
     <ClInclude Include="random.h" />
     <ClInclude Include="ResourcePath.hpp" />
+    <ClInclude Include="StartScreen.h" />
+    <ClInclude Include="State.hpp" />
+    <ClInclude Include="StateMaschine.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

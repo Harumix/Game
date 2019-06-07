@@ -1,11 +1,12 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
 #include <iostream>
-#include "ResourcePath.hpp""
+#include "ResourcePath.hpp"
 #include "player.h"
 #include "projectile.h"
 #include "enemy.h"
 #include "random.h"
+#include "Game.hpp"
 
 using std::cout;
 using std::cin;
@@ -14,6 +15,9 @@ using std::endl;
 
 int main()
 {
+	Game Tussle(600, 222, "The Tussle");
+	//Game Tussle(1270, 720, "The Tussle");
+	/*
 	sf::Clock clock1;
 	sf::Clock clock2;
 	sf::Clock clock3;
@@ -24,7 +28,7 @@ int main()
 	// Tworzenie okna 
 	sf::RenderWindow window(sf::VideoMode(660, 222), "Game");
 	// Pozycja startowa okna
-	window.setPosition(sf::Vector2i(20, sf::VideoMode::getDesktopMode().height/5));
+	window.setPosition(sf::Vector2i(20, sf::VideoMode::getDesktopMode().height / 5));
 	// Rozmiar okna
 	window.setSize(sf::Vector2u(1320, 440));
 	// Nazwa okna
@@ -38,11 +42,11 @@ int main()
 	window.setIcon(icon.getSize().x, icon.getSize().y, icon.getPixelsPtr());
 
 	//Tlo gry
+	sf::Sprite sbackground;
 	sf::Texture tbackground;
 	tbackground.loadFromFile("../External/Graphics/street.png");
-	sf::Sprite sbackground;
-	sf::Vector2u size = tbackground.getSize();
 	sbackground.setTexture(tbackground);
+	sf::Vector2u size = tbackground.getSize();
 	//sbackground.setScale(sf::Vector2f(2,2));
 	//sbackground.setOrigin(size.x/4, size.y/4);
 
@@ -54,16 +58,16 @@ int main()
 	sf::Sprite characterSprite(characterTexture);
 	characterTexture.setSmooth(true);
 
-		// Tekst Naglowkowy
-	//sf::Font Odelette;
-	//if (!Odelette.loadFromFile("../External/Fonts/Odelette.ttf")) {
-	//	return EXIT_FAILURE;
-	//}
-	//sf::Text text("Game", Odelette, 50);
-	//text.setFillColor(sf::Color::Red);
-	//text.setPosition(400,0);
+	// Tekst Naglowkowy
+//sf::Font Odelette;
+//if (!Odelette.loadFromFile("../External/Fonts/Odelette.ttf")) {
+//	return EXIT_FAILURE;
+//}
+//sf::Text text("Game", Odelette, 50);
+//text.setFillColor(sf::Color::Red);
+//text.setPosition(400,0);
 
-	// Tworzenie muzyki
+// Tworzenie muzyki
 	sf::Music music;
 	if (!music.openFromFile("../External/Music/PumpedUpKicks.ogg"))
 		return -1;
@@ -91,7 +95,7 @@ int main()
 	enemy1.sprite.setTexture(characterTexture);
 	//enemy1.rect.setPosition(200, 200);
 	enemyArray.push_back(enemy1);
-	
+
 
 	// Petla gry
 	while (window.isOpen())
@@ -110,7 +114,7 @@ int main()
 				window.close();
 			}
 		}
-		
+
 		// Clear screen
 		window.clear();
 
@@ -129,7 +133,7 @@ int main()
 			{
 				if (projectileArray[counter].rect.getGlobalBounds().intersects(enemyArray[counter2].rect.getGlobalBounds())) {
 					projectileArray[counter].destroy = true;
-					enemyArray[counter2].hp-=projectile1.attackDamage;
+					enemyArray[counter2].hp -= projectile1.attackDamage;
 					if (enemyArray[counter2].hp <= 0) enemyArray[counter2].alive = false;
 				}
 				counter2++;
@@ -162,13 +166,13 @@ int main()
 		// Create projectiles 
 		if (elapsed1.asSeconds() >= 1) {
 
-			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
+			if :(sf:Keyboard::isKeyPressed(sf::Keyboard::Space))
 			{
 				projectile1.rect.setPosition(Player1.rect.getPosition().x + Player1.rect.getSize().x / 2, Player1.rect.getPosition().y);
 				projectile1.direction = Player1.direction;
 				projectileArray.push_back(projectile1);
 				clock1.restart();
-			}	
+			}
 		}
 
 		// Draw projectiles
@@ -209,6 +213,6 @@ int main()
 		window.display();
 
 	}
-
+	*/
 	return 0;
 }

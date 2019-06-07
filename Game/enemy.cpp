@@ -2,16 +2,16 @@
 
 enemy::enemy()
 {
-	rect.setSize(sf::Vector2f(50, 128));
-	rect.setPosition(500, 158);
+	rect.setSize(sf::Vector2f(50, 100));
+	rect.setPosition(500, 125);
 	rect.setFillColor(sf::Color::Cyan);
-	sprite.setTextureRect(sf::IntRect(128, 128, 64, 64));
-	sprite.setScale(sf::Vector2f(2, 1));
+	sprite.setTextureRect(sf::IntRect(22, 149, 65, 90));
+	sprite.setScale(sf::Vector2f(1, 1));
 }
 
 void enemy::update()
 {
-	sprite.setPosition(rect.getPosition().x-40,rect.getPosition().y);
+	sprite.setPosition(rect.getPosition());
 }
 
 void enemy::updateMovement()
@@ -19,13 +19,13 @@ void enemy::updateMovement()
 	if (direction == 3)
 	{
 		rect.move(-movementSpeed, 0);
-		sprite.setTextureRect(sf::IntRect(0 + (64 * counterWalking), 64, 64, 64));
+		//sprite.setTextureRect(sf::IntRect(0 + (64 * counterWalking), 64, 64, 64));
 	}
 
 	else if (direction == 4)
 	{
-		rect.move(movementSpeed, 0);
-		sprite.setTextureRect(sf::IntRect(0 + (64 * counterWalking), 192, 64, 64));
+		//rect.move(movementSpeed, 0);
+		//sprite.setTextureRect(sf::IntRect(0 + (64 * counterWalking), 192, 64, 64));
 	}
 
 	/*
