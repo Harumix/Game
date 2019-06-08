@@ -1,7 +1,5 @@
 #include "player.h"
 
-sf::Clock zegar;
-
 player::player()
 {
 	rect.setSize(sf::Vector2f(50, 100));
@@ -22,7 +20,7 @@ void player::displayHP() {
 
 void player::updateMovement()
 {
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A) && !animating && !animating2 && !animating3 && !animating4 && sprite.getPosition().x >= 0)
 	{
 		rect.move(-movementSpeed, 0);
 
@@ -46,13 +44,13 @@ void player::updateMovement()
 
 		direction = 3;
 	}
-	
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
+
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::D) && !animating && !animating2 && !animating3 && !animating4 && sprite.getPosition().x <=550)
 	{
 		rect.move(movementSpeed, 0);
 
 		if (counterWalking == 0)
-		sprite.setTextureRect(sf::IntRect(22, 149, 65, 90));
+			sprite.setTextureRect(sf::IntRect(22, 149, 65, 90));
 
 		if (counterWalking == 1)
 			sprite.setTextureRect(sf::IntRect(94, 144, 71, 94));
@@ -88,75 +86,189 @@ void player::updateMovement()
 	*/
 
 
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::I))
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::I) && !animating && !animating2 && !animating3 && !animating4)
 	{
-		
-		zegar.restart();
+		animating = true;
+		animacja.restart();
 		counterAttack = 0;
-
 		sprite.setTextureRect(sf::IntRect(115, 263, 107, 95));
+		rect.setSize(sf::Vector2f(107, 95));
+	}
 
-		
+	if (animating) {
+		if (animacja.getElapsedTime().asMilliseconds() >= 400) {
 
-			if (zegar.getElapsedTime().asMilliseconds() == 400) {
+			if (counterAttack == 0) {
+				sprite.setTextureRect(sf::IntRect(29, 264, 79, 94));
+				counterAttack++;
+				animacja.restart();
+			}
 
-				if (counterAttack == 0) {
-					sprite.setTextureRect(sf::IntRect(29, 264, 79, 94));
-					cout << "Dziala1" << endl;
-					cout << counterAttack << endl;
-					counterAttack++;
-					zegar.restart();
-				}
+			if (counterAttack == 1) {
+				sprite.setTextureRect(sf::IntRect(115, 263, 107, 95));
+				counterAttack++;
+				animacja.restart();
+			}
 
-				if (counterAttack == 1) {
-					sprite.setTextureRect(sf::IntRect(115, 263, 107, 95));
-					cout << "Dziala2" << endl;
-					cout << counterAttack << endl;
-					counterAttack++;
-					zegar.restart();
-				}
+			if (counterAttack == 2) {
+				sprite.setTextureRect(sf::IntRect(230, 264, 77, 94));
+				counterAttack++;
+				animacja.restart();
+			}
 
-				if (counterAttack == 2) {
-					sprite.setTextureRect(sf::IntRect(230, 264, 77, 94));
-					cout << "Dziala3" << endl;
-					cout << counterAttack << endl;
-					counterAttack++;
-					zegar.restart();
-				}
-
-				if (counterAttack == 3) {
-					sprite.setTextureRect(sf::IntRect(315, 264, 66, 94));
-					cout << "Dziala4" << endl;
-					cout << counterAttack << endl;
-					counterAttack++;
-					zegar.restart();
-				}
-			
-			
-
-			}			
+			if (counterAttack == 3) {
+				sprite.setTextureRect(sf::IntRect(315, 264, 66, 94));
+				animating = false;
+			}
+		}
 		direction = 3;
 	}
 
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::U))
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::U) && !animating && !animating2 && !animating3 && !animating4)
 	{
-		rect.move(0, movementSpeed);
-		sprite.setTextureRect(sf::IntRect(0 + (64 * counterWalking), 128, 64, 64));
-		direction = 1;
+		animating2 = true;
+		animacja.restart();
+		counterAttack = 0;
+		sprite.setTextureRect(sf::IntRect(642, 265, 109, 93));
 	}
 
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::J))
-	{
-		rect.move(0, -movementSpeed);
-		sprite.setTextureRect(sf::IntRect(0 + (64 * counterWalking), 0, 64, 64));
-		direction = 2;
+	if (animating2) {
+		if (animacja.getElapsedTime().asMilliseconds() >= 400) {
+
+			if (counterAttack == 0) {
+				sprite.setTextureRect(sf::IntRect(563, 264, 71, 93));
+				counterAttack++;
+				animacja.restart();
+			}
+
+			if (counterAttack == 1) {
+				sprite.setTextureRect(sf::IntRect(642, 265, 109, 93));
+				counterAttack++;
+				animacja.restart();
+			}
+
+			if (counterAttack == 2) {
+				sprite.setTextureRect(sf::IntRect(759, 264, 71, 94));
+				counterAttack++;
+				animacja.restart();
+			}
+
+			if (counterAttack == 3) {
+				sprite.setTextureRect(sf::IntRect(838, 264, 65, 94));
+				animating2 = false;
+			}
+		}
+		direction = 3;
 	}
 
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::K))
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::J) && !animating && !animating2 && !animating3 && !animating4)
 	{
-		rect.move(0, movementSpeed);
-		sprite.setTextureRect(sf::IntRect(0 + (64 * counterWalking), 128, 64, 64));
-		direction = 1;
+		animating3 = true;
+		animacja.restart();
+		counterAttack = 0;
+		sprite.setTextureRect(sf::IntRect(162, 23, 101, 86));
+	}
+
+	if (animating3) {
+		if (animacja.getElapsedTime().asMilliseconds() >= 400) {
+
+			if (counterAttack == 0) {
+				sprite.setTextureRect(sf::IntRect(4, 10, 83, 99));
+				counterAttack++;
+				animacja.restart();
+			}
+
+			if (counterAttack == 1) {
+				sprite.setTextureRect(sf::IntRect(95, 17, 59, 92));
+				counterAttack++;
+				animacja.restart();
+			}
+
+			if (counterAttack == 2) {
+				sprite.setTextureRect(sf::IntRect(162, 23, 101, 86));
+				counterAttack++;
+				animacja.restart();
+			}
+
+			if (counterAttack == 3) {
+				sprite.setTextureRect(sf::IntRect(271, 23, 55, 86));
+				counterAttack++;
+				animacja.restart();
+			}
+
+			if (counterAttack == 4) {
+				sprite.setTextureRect(sf::IntRect(334, 10, 82, 101));
+				counterAttack++;
+				animacja.restart();
+			}
+
+			if (counterAttack == 5) {
+				sprite.setTextureRect(sf::IntRect(425, 17, 66, 94));
+				counterAttack++;
+				animacja.restart();
+			}
+
+			if (counterAttack == 6) {
+				sprite.setTextureRect(sf::IntRect(425, 17, 66, 94));
+				animating3 = false;
+			}
+		}
+		direction = 3;
+	}
+
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::K) && !animating && !animating2 && !animating3 && !animating4)
+	{
+		animating4 = true;
+		animacja.restart();
+		counterAttack = 0;
+		sprite.setTextureRect(sf::IntRect(761, 28, 113, 99));
+	}
+
+	if (animating4) {
+		if (animacja.getElapsedTime().asMilliseconds() >= 400) {
+
+			if (counterAttack == 0) {
+				sprite.setTextureRect(sf::IntRect(511, 36, 67, 91));
+				counterAttack++;
+				animacja.restart();
+			}
+
+			if (counterAttack == 1) {
+				sprite.setTextureRect(sf::IntRect(586, 21, 73, 106));
+				counterAttack++;
+				animacja.restart();
+			}
+
+			if (counterAttack == 2) {
+				sprite.setTextureRect(sf::IntRect(667, 6, 86, 121));
+				counterAttack++;
+				animacja.restart();
+			}
+
+			if (counterAttack == 3) {
+				sprite.setTextureRect(sf::IntRect(761, 28, 113, 99));
+				counterAttack++;
+				animacja.restart();
+			}
+
+			if (counterAttack == 4) {
+				sprite.setTextureRect(sf::IntRect(882, 39, 114, 88));
+				counterAttack++;
+				animacja.restart();
+			}
+
+			if (counterAttack == 5) {
+				sprite.setTextureRect(sf::IntRect(1004, 35, 94, 92));
+				counterAttack++;
+				animacja.restart();
+			}
+
+			if (counterAttack == 6) {
+				sprite.setTextureRect(sf::IntRect(425, 17, 66, 94));
+				animating4 = false;
+			}
+		}
+		direction = 3;
 	}
 
 	counterWalking++;

@@ -28,82 +28,26 @@ void GameScreenVsP::update()
 {
 	sf::Time elapsed1 = clock1.getElapsedTime();
 	sf::Time elapsed2 = clock2.getElapsedTime();
-	sf::Time elapsed3 = clock3.getElapsedTime();
 
-	//Colission
-	counter = 0;
-	for (iter = projectileArray.begin(); iter != projectileArray.end(); iter++)
-	{
-		counter2 = 0;
-		for (iter2 = enemyArray.begin(); iter2 != enemyArray.end(); iter2++)
-		{
-			if (projectileArray[counter].rect.getGlobalBounds().intersects(enemyArray[counter2].rect.getGlobalBounds())) {
-				projectileArray[counter].destroy = true;
-				enemyArray[counter2].hp -= projectile1.attackDamage;
-				if (enemyArray[counter2].hp <= 0) enemyArray[counter2].alive = false;
-			}
-			counter2++;
-		}
-		counter++;
+	//DMG
+	if ((sf::Keyboard::isKeyPressed(sf::Keyboard::U) || sf::Keyboard::isKeyPressed(sf::Keyboard::I) || sf::Keyboard::isKeyPressed(sf::Keyboard::J) || sf::Keyboard::isKeyPressed(sf::Keyboard::K)) && Player1.rect.getGlobalBounds().intersects(Player2.rect.getGlobalBounds()) && elapsed1.asMilliseconds() >= 400) {
+		Player2.hp -= 10;
+		if (Player2.hp <= 0) Player2.alive = false;
+		std::cout << Player2.hp << endl;
+		clock1.restart();
 	}
-
-	//Delete Projectile
-	counter = 0;
-	for (iter = projectileArray.begin(); iter != projectileArray.end(); iter++)
-	{
-		if (projectileArray[counter].destroy == true) {
-			projectileArray.erase(iter);
-			break;
-		}
-
-		counter++;
-	}
-
-	//Dead
-	counter = 0;
-	for (iter2 = enemyArray.begin(); iter2 != enemyArray.end(); iter2++)
-	{
-		if (enemyArray[counter].alive == false) {
-			enemyArray.erase(iter2);
-			break;
-		}
-		counter++;
-	}
-	// Create projectiles 
-	if (elapsed1.asSeconds() >= 1) {
-
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
-		{
-			projectile1.rect.setPosition(Player1.rect.getPosition().x + Player1.rect.getSize().x / 2, Player1.rect.getPosition().y);
-			projectile1.direction = Player1.direction;
-			projectileArray.push_back(projectile1);
-			clock1.restart();
-		}
-	}
-
-	// Draw projectiles
-	counter = 0;
-	for (iter = projectileArray.begin(); iter != projectileArray.end(); iter++)
-	{
-		projectileArray[counter].update();
-		counter++;
-	}
-
-	// Draw Enemies
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Numpad7)) {
-		enemyArray.push_back(enemy1);
-	}
-
-	counter2 = 0;
-	for (iter2 = enemyArray.begin(); iter2 != enemyArray.end(); iter2++)
-	{
-		enemyArray[counter2].update();
-		enemyArray[counter2].updateMovement();
-		counter2++;
+	
+	if ((sf::Keyboard::isKeyPressed(sf::Keyboard::Numpad8) || sf::Keyboard::isKeyPressed(sf::Keyboard::Numpad9) || sf::Keyboard::isKeyPressed(sf::Keyboard::Numpad5) || sf::Keyboard::isKeyPressed(sf::Keyboard::Numpad6)) && Player2.rect.getGlobalBounds().intersects(Player1.rect.getGlobalBounds()) && elapsed2.asMilliseconds() >= 400) {
+		Player1.hp -= 10;
+		if (Player1.hp <= 0) Player1.alive = false;
+		std::cout << Player1.hp << endl;
+		clock2.restart();
 	}
 
 	Player1.update();
 	Player1.updateMovement();
+	Player2.update();
+	Player2.updateMovement();
 }
 
 void GameScreenVsP::draw()
@@ -117,15 +61,12 @@ void GameScreenVsP::draw()
 	characterSprite.setTexture(characterTexture);
 
 	Player1.sprite.setTexture(characterTexture);
-	enemy1.sprite.setTexture(characterTexture);
-	enemyArray.push_back(enemy1);
+	Player2.sprite.setTexture(characterTexture);
 
 	data_->window.clear();
 	data_->window.draw(sbackground);
 	data_->window.draw(Player1.sprite);
-	//data_->window.draw(enemy1.rect);
-
-	data_->window.draw(enemyArray[0].sprite);
+	data_->window.draw(Player2.sprite);
 
 	for (auto& i : projectileArray)
 	{

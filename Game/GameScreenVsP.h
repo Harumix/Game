@@ -6,6 +6,7 @@
 #include "projectile.h"
 #include "enemy.h"
 #include "player.h"
+#include "playerb.h"
 
 class GameScreenVsP : public State
 {
@@ -32,6 +33,7 @@ private:
 
 	// Klasa postaci
 	player Player1;
+	playerb Player2;
 
 	// Wektor pociskow
 	std::vector<projectile>::const_iterator iter;
@@ -46,5 +48,6 @@ private:
 
 	// Klasa przeciwinka
 	enemy enemy1;
+	enemy enemy2;
 };
 

@@ -142,6 +142,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MouseManager.cpp" />
     <ClCompile Include="player.cpp" />
+    <ClCompile Include="playerb.cpp" />
     <ClCompile Include="projectile.cpp" />
     <ClCompile Include="PvEScreen.cpp" />
     <ClCompile Include="PvPScreen.cpp" />
@@ -158,6 +159,7 @@
     <ClInclude Include="GameScreenVsP.h" />
     <ClInclude Include="MouseManager.h" />
     <ClInclude Include="player.h" />
+    <ClInclude Include="playerb.h" />
     <ClInclude Include="projectile.h" />
     <ClInclude Include="PvEScreen.h" />
     <ClInclude Include="PvPScreen.h" />
